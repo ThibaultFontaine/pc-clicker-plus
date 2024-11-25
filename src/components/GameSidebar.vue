@@ -31,7 +31,7 @@ const setCurrentTab = (value: string): void => {
           :key="tab"
           :value="tab"
         >
-          <v-container fluid>
+          <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
                 <v-col
@@ -39,10 +39,17 @@ const setCurrentTab = (value: string): void => {
                   :key="autoClicker.id"
                   cols="12"
                 >
-                  <v-card color="grey-lighten-1">
-                    <v-card-title>{{ autoClicker.name }}</v-card-title>
-                    <v-card-text>{{ autoClicker.description }}</v-card-text>
-                  </v-card>
+                <v-card class="pixel-card">
+                  <v-row align="center">
+                    <v-col cols="4" class="image-container">
+                      <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
+                    </v-col>
+                    <v-col cols="8">
+                      <v-card-title class="pixel-title">{{ autoClicker.name }}</v-card-title>
+                      <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
                 </v-col>
               </div>
               <div v-else-if="tab === 'pc'">
@@ -63,6 +70,7 @@ const setCurrentTab = (value: string): void => {
 </template>
 
 <style scoped>
+
 .sidebar {
   display: flex;
   padding-top: 2rem;
@@ -70,7 +78,8 @@ const setCurrentTab = (value: string): void => {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  width: 50%;
+  width: 90%;
+  overflow-y: auto
 }
 
 .topBar {
@@ -83,6 +92,55 @@ const setCurrentTab = (value: string): void => {
   align-items: center;
   height: 100%;
   width: 100%;
+}
+
+.scrollable-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+  scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;/* Hide Scrollbar Chrome */
+}
+
+.pixel-card {
+  background-color: #ccc;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 4px 4px 0px #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel-image {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.pixel-title {
+  font-family: 'PixelFont', sans-serif;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.pixel-description {
+  font-family: 'PixelFont', sans-serif;
+  color: #555;
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
 }
 
 
