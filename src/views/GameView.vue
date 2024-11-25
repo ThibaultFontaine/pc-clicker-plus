@@ -1,7 +1,14 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+
+import ClickableComputer from '@/components/ClickableComputer.vue';
+</script>
+
 <template>
   <div class="gameView">
     <div class="gamePannel">
-      <p>PC</p>
+      <ClickableComputer />
     </div>
     <div class="gameSidebar">
       <p>PANNEL</p>

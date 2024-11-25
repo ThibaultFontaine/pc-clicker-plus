@@ -1,18 +1,14 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useXpStore = defineStore('game', () => {
+export const useXpStore = defineStore('xp', () => {
   const xp = ref(0);
 
   //Ajouter de l'xp
-  const addXp = (amount: number, multiplier: number) => {
-    xp.value += amount * multiplier;
+  const addXp = (amount: number) => {
+    xp.value += amount;
+    console.log('xp', xp.value);
   };
 
-  //Retirer de l'xp
-  const removeXp = (amount: number) => {
-    xp.value -= amount;
-  };
-
-  return { xp, addXp, removeXp };
+  return { xp, addXp };
 });
