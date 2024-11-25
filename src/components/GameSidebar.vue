@@ -1,41 +1,64 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { autoClickers } from "@/constants/autoClickers";
 
 const currentTab = ref('autoclicker');
 
-function setCurrentTab(value: string) {
+const setCurrentTab = (value: string): void => {
   currentTab.value = value;
 }
 </script>
 
 <template>
   <div class="sidebar">
-  <v-card>
-    <v-tabs
-      v-model="currentTab"
-      align-tabs="center"
-      color="deep-purple-accent-4"
+    <v-card
+    color="grey-darken-1"
     >
-      <v-tab :value="'autoclick'">AutoClick</v-tab>
-      <v-tab :value="'pc'">PC</v-tab>
-      <v-tab :value="'challenge'">Défi</v-tab>
-      <v-tab :value="'leaderboard'">Classement</v-tab>
-    </v-tabs>
-
-    <v-tabs-window v-model="currentTab">
-      <v-tabs-window-item
-        v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']"
-        :key="tab"
-        :value="tab"
+      <v-tabs
+        v-model="currentTab"
+        align-tabs="center"
+        color="grey-darken-4"
       >
-        <v-container fluid>
-          <v-row>
-            {{tab}}
-          </v-row>
-        </v-container>
-      </v-tabs-window-item>
-    </v-tabs-window>
-  </v-card>
+        <v-tab :value="'autoclick'">AutoClick</v-tab>
+        <v-tab :value="'pc'">PC</v-tab>
+        <v-tab :value="'challenge'">Défi</v-tab>
+        <v-tab :value="'leaderboard'">Classement</v-tab>
+      </v-tabs>
+
+      <v-tabs-window v-model="currentTab">
+        <v-tabs-window-item
+          v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']"
+          :key="tab"
+          :value="tab"
+        >
+          <v-container fluid>
+            <v-row>
+              <div v-if="tab === 'autoclick'">
+                <v-col
+                  v-for="autoClicker in autoClickers"
+                  :key="autoClicker.id"
+                  cols="12"
+                >
+                  <v-card color="grey-lighten-1">
+                    <v-card-title>{{ autoClicker.name }}</v-card-title>
+                    <v-card-text>{{ autoClicker.description }}</v-card-text>
+                  </v-card>
+                </v-col>
+              </div>
+              <div v-else-if="tab === 'pc'">
+                <p>This is the PC tab content.</p>
+              </div>
+              <div v-else-if="tab === 'challenge'">
+                <p>This is the Challenge tab content.</p>
+              </div>
+              <div v-else-if="tab === 'leaderboard'">
+                <p>This is the Leaderboard tab content.</p>
+              </div>
+            </v-row>
+          </v-container>
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </v-card>
   </div>
 </template>
 
@@ -46,8 +69,8 @@ function setCurrentTab(value: string) {
   padding-bottom: 2rem;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 50%;
 }
 
 .topBar {
