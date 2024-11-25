@@ -15,6 +15,7 @@ import { VBtn } from 'vuetify/lib/components/index.mjs';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/welcome">Welcome</RouterLink>
       </nav>
     </div>
   </header>
