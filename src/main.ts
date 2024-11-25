@@ -6,6 +6,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import 'vuetify/styles'
 import App from './App.vue'
+import { initializeAuth } from './firebase/auth'
 import router from './router'
 
 const vuetify = createVuetify({
@@ -19,4 +20,6 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 
-app.mount('#app')
+initializeAuth().then(() => {
+  app.mount('#app')
+})

@@ -24,11 +24,11 @@ const { level } = storeToRefs(levelStore)
 const { clicks } = storeToRefs(clickStore)
 const { autoclickers } = storeToRefs(autoclickersStore)
 
-const totalAutoclickers: number = computed(() => {
+const totalAutoclickers = computed<number>(() => {
   console.log(autoclickers)
   return autoclickers.value
-  .map((auto: any) => auto.currentAmount)
-  .reduce((acc: number, val: number) => acc + val, 0)
+    .map((auto: any) => auto.currentAmount)
+    .reduce((acc: number, val: number) => acc + val, 0)
 });
 
 const handleAutoclicking = (): void => {
@@ -36,12 +36,12 @@ const handleAutoclicking = (): void => {
     const totalMoneyPerSecond: number = Object.values(autoclickers.value)
       .map((auto: any) => auto.currentAmount * auto.cps)
       .reduce((acc: number, val: number) => acc + val, 0)
-    ;
-  
+      ;
+
     console.log(totalMoneyPerSecond);
 
     moneyStore.addMoney(totalMoneyPerSecond);
-  
+
     console.log(money.value);
   }
 
@@ -58,12 +58,7 @@ setInterval(handleAutoclicking, 1000);
           <span class="moneyCounter">{{ money }}$</span>
         </v-col>
         <v-col>
-          <v-progress-linear
-            color="deep-orange"
-            height="10"
-            model-value="60"
-            striped
-          />
+          <v-progress-linear color="deep-orange" height="10" model-value="60" striped />
         </v-col>
       </v-row>
       <ClickableComputer />

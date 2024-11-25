@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+
 import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '@/stores/moneyStore';
 import { useXpStore } from '@/stores/xpStore';
@@ -14,8 +15,11 @@ const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
 import PcTab from "@/components/Sidebar/PcTab.vue";
 
+import { autoClickers } from "@/constants/autoClickers";
+import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
 
-const currentTab = ref('autoclicker');
+
+const currentTab = ref<string>('autoclicker');
 
 const setCurrentTab = (value: string): void => {
   currentTab.value = value;
@@ -52,9 +56,9 @@ const buyAutoclicker = (id: number): void => {
         align-tabs="center"
         color="grey-darken-4"
       >
-        <v-tab :value="'autoclick'">AutoClick</v-tab>
-        <v-tab :value="'pc'">PC</v-tab>
-        <v-tab :value="'challenge'">Défi</v-tab>
+        <v-tab :value="'autoclick'">Recrutement</v-tab>
+        <v-tab :value="'pc'">Compétences</v-tab>
+        <v-tab :value="'challenge'">Défis</v-tab>
         <v-tab :value="'leaderboard'">Classement</v-tab>
       </v-tabs>
 
@@ -68,7 +72,7 @@ const buyAutoclicker = (id: number): void => {
                   :key="autoClicker.id"
                   cols="12"
                 >
-                  <v-card 
+                  <v-card
                     class="pixel-card"
                     @click="buyAutoclicker(autoClicker.id)"
                   >
@@ -94,7 +98,7 @@ const buyAutoclicker = (id: number): void => {
                 <p>This is the Challenge tab content.</p>
               </div>
               <div v-else-if="tab === 'leaderboard'">
-                <p>This is the Leaderboard tab content.</p>
+                <LeaderboardTab />
               </div>
             </v-row>
           </v-container>
