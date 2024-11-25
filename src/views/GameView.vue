@@ -1,10 +1,14 @@
+<script setup lang="ts">
+import GameSidebar from "../components/GameSidebar.vue";
+</script>
+
 <template>
   <div class="gameView">
     <div class="gamePannel">
       <p>PC</p>
     </div>
     <div class="gameSidebar">
-      <p>PANNEL</p>
+      <GameSidebar />
     </div>
   </div>
 </template>
