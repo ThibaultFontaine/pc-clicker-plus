@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { autoClickers } from '@/constants/autoClickers';
 
-export const useGameStore = defineStore('game', () => {
+export const useXpStore = defineStore('game', () => {
   const xp = ref(0);
 
   //Ajouter de l'xp
@@ -15,5 +14,5 @@ export const useGameStore = defineStore('game', () => {
     xp.value -= amount;
   };
 
-  return { xp, autoClickers };
+  return { xp, addXp, removeXp };
 });

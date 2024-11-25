@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useGameStore = defineStore('game', () => {
+export const useMoneyStore = defineStore('game', () => {
   const money = ref(0);
 
   //Ajouter de l'argent
@@ -14,5 +14,5 @@ export const useGameStore = defineStore('game', () => {
     money.value -= amount;
   };
 
-  return { money };
+  return { money, addMoney, removeMoney };
 });
