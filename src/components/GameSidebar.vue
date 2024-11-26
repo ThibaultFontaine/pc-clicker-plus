@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { autoClickers } from "@/constants/autoClickers";
-import { bonusClicks } from "@/constants/bonusClicks";
+import PcTab from "@/components/Sidebar/PcTab.vue";
+
 
 const currentTab = ref('autoclicker');
 
@@ -40,19 +41,7 @@ const setCurrentTab = (value: string): void => {
                 </v-col>
               </div>
               <div v-else-if="tab === 'pc'">
-                <v-col v-for="bonusClick in bonusClicks" :key="bonusClick.id" cols="12">
-                  <v-card class="pixel-card">
-                    <v-row align="center">
-                      <v-col cols="4" class="image-container">
-                        <img :src="bonusClick.image" alt="BonusClick Image" class="pixel-image">
-                      </v-col>
-                      <v-col cols="8">
-                        <v-card-title>{{ bonusClick.name }}</v-card-title>
-                        <v-card-text>{{ bonusClick.description }}</v-card-text>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
+                <PcTab/>
               </div>
               <div v-else-if="tab === 'challenge'">
                 <p>This is the Challenge tab content.</p>
