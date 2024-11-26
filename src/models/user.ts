@@ -8,4 +8,5 @@ export type User = {
   experience: number
   autoClickers: AutoClickerDb[]
   skills: Skill[]
+  completedChallenges: number[]
 }

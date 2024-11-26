@@ -1,4 +1,4 @@
-import { SKILLS } from '@/constants/skill'
+import { SKILLS } from '@/constants/skills'
 import type { Skill } from '@/models/skill'
 import { getMe, saveData } from '@/services/user'
 import { defineStore } from 'pinia'

@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
-
+import ClickableComputer from '@/components/ClickableComputer.vue';
+import type { AutoClicker } from '@/models/autoClicker';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
 import { useMoneyStore } from '@/stores/moneyStore';
-
-
-import ClickableComputer from '@/components/ClickableComputer.vue';
+import { storeToRefs } from 'pinia';
 import type { ComputedRef } from 'vue';
+import { computed } from 'vue';
 import GameSidebar from "../components/GameSidebar.vue";
-import type { AutoClicker } from '@/models/autoClicker';
 
 const moneyStore = useMoneyStore()
 const autoclickersStore = useAutoclickersStore()
@@ -20,8 +17,8 @@ const { autoclickers } = storeToRefs(autoclickersStore)
 const totalAutoclickers: ComputedRef<number> = computed(() => {
   console.log(autoclickers)
   return autoclickers.value
-  .map((auto: AutoClicker) => auto.currentAmount)
-  .reduce((acc: number, val: number) => acc + val, 0)
+    .map((auto: AutoClicker) => auto.currentAmount)
+    .reduce((acc: number, val: number) => acc + val, 0)
 });
 
 const handleAutoclicking = (): void => {

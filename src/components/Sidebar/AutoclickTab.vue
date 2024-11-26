@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { type PropType } from 'vue';
-
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
-import { useMoneyStore } from '@/stores/moneyStore';
-import { useXpStore } from '@/stores/xpStore';
 import { storeToRefs } from 'pinia';
+import { type PropType } from 'vue';
 
 const props = defineProps({
   sendError: {
@@ -13,12 +10,8 @@ const props = defineProps({
   },
 });
 
-const moneyStore = useMoneyStore();
-const xpStore = useXpStore();
 const autoclickersStore = useAutoclickersStore();
 
-const { money } = storeToRefs(moneyStore);
-const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
 
 const buyAutoClicker = (id: number) => {

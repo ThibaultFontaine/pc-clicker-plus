@@ -1,25 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import PcTab from "@/components/Sidebar/PcTab.vue";
-import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
 import AutoclickTab from "@/components/Sidebar/AutoclickTab.vue";
-import ChallengesList from "@/components/Sidebar/ChallengesList.vue"
-import { useMoneyStore } from "@/stores/moneyStore";
-import { useXpStore } from "@/stores/xpStore";
-import { useAutoclickersStore } from "@/stores/autoClickersStore";
-import { storeToRefs } from 'pinia'
-
-
-
-
-const moneyStore = useMoneyStore();
-const xpStore = useXpStore();
-const autoclickersStore = useAutoclickersStore();
-
-const { money } = storeToRefs(moneyStore);
-const { xp } = storeToRefs(xpStore);
-const { autoclickers } = storeToRefs(autoclickersStore);
+import ChallengesList from "@/components/Sidebar/ChallengesList.vue";
+import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
+import PcTab from "@/components/Sidebar/PcTab.vue";
 
 const currentTab = ref<string>('autoclicker');
 
@@ -34,19 +19,9 @@ const showAlert = () => {
 
 <template>
   <div class="sidebar">
-    <v-card
-      color="grey-darken-1"
-    >
-      <v-alert
-        :hidden="alert"
-        color="error"
-        text="Tu es trop pauvre ! Reviens après avoir plus clické !"
-      />
-      <v-tabs
-        v-model="currentTab"
-        align-tabs="center"
-        color="grey-darken-4"
-      >
+    <v-card color="grey-darken-1">
+      <v-alert :hidden="alert" color="error" text="Tu es trop pauvre ! Reviens après avoir plus clické !" />
+      <v-tabs v-model="currentTab" align-tabs="center" color="grey-darken-4">
         <v-tab :value="'autoclick'">Recrutement</v-tab>
         <v-tab :value="'pc'">Compétences</v-tab>
         <v-tab :value="'challenge'">Défis</v-tab>
@@ -58,13 +33,13 @@ const showAlert = () => {
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
-                <AutoclickTab :sendError="showAlert"  />
+                <AutoclickTab :sendError="showAlert" />
               </div>
               <div v-else-if="tab === 'pc'">
                 <PcTab />
               </div>
               <div v-else-if="tab === 'challenge'">
-                <ChallengesList/>
+                <ChallengesList />
               </div>
               <div v-else-if="tab === 'leaderboard'">
                 <LeaderboardTab />
@@ -79,6 +54,7 @@ const showAlert = () => {
 
 <style scoped>
 @import "@/assets/styles/pixel-styles.css";
+
 .sidebar {
   display: flex;
   padding-top: 2rem;
@@ -111,6 +87,4 @@ const showAlert = () => {
   scrollbar-width: none;
   /* Hide Scrollbar Firefox */
 }
-
-
 </style>
