@@ -15,4 +15,10 @@ import Footer from "@/components/Footer.vue";
   min-width: 100%;
   min-height: 100%;
 }
+@font-face {
+  font-family: 'PixelFont';
+  src: url('@/assets/Fonts/joystix monospace.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 </style>
