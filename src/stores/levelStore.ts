@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useLevelStore = defineStore('level', () => {
-  const level = ref(1);
+  const level = ref<number>(1);
 
   // Monter de niveau
   const addLevel = () => {

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useMoneyStore = defineStore('money', () => {
-  const money = ref(0);
+  const money = ref<number>(0);
 
   //Ajouter de l'argent
   const addMoney = (amount: number) => {

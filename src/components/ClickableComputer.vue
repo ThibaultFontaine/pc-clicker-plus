@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMoneyStore } from '@/stores/moneyStore'
 import { useXpStore } from '@/stores/xpStore'
-import { useLevelStore } from '@/stores/progressionStore'
+import { useLevelStore } from '@/stores/levelStore'
+import { useClickStore } from '@/stores/clickStore'
+
 import defaultImage from '@/assets/computer.png';
 import pressedImage from '@/assets/pressed_computer.png';
 import audioFile from '@/assets/keypress5.mp3';
@@ -12,18 +14,21 @@ const sound = new Audio(audioFile);
 
 const moneyStore = useMoneyStore()
 const xpStore = useXpStore()
-const progressionStore = useLevelStore()
+const levelStore = useLevelStore()
+const clickStore = useClickStore()
 
 const { money } = storeToRefs(moneyStore)
 const { xp } = storeToRefs(xpStore)
-const { level } = storeToRefs(progressionStore)
+const { level } = storeToRefs(levelStore)
 
 const { addMoney } = moneyStore
 const { addXp } = xpStore
+const { addClick } = clickStore
 
 const manualClick = () => {
   addMoney(level.value)
   addXp(level.value)
+  addClick()
   
   if (!sound.paused) {
     sound.pause();
