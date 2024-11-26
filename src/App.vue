@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Footer from "@/components/Footer.vue";
+import PagesFooter from "@/components/PageFooter.vue";
 </script>
 
 <template>
   <div id="app">
     <RouterView />
-    <Footer />
+    <PagesFooter/>    
   </div>
 </template>
 

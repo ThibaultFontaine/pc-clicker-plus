@@ -39,12 +39,12 @@ const handleAutoclicking = (): void => {
     const totalMoneyPerSecond: number = Object.values(autoclickers.value)
       .map((auto: any) => auto.currentAmount * auto.cps)
       .reduce((acc: number, val: number) => acc + val, 0)
-    ;
-  
+      ;
+
     console.log(totalMoneyPerSecond);
 
     moneyStore.addMoney(totalMoneyPerSecond);
-  
+
     console.log(money.value);
   }
 
@@ -61,12 +61,7 @@ setInterval(handleAutoclicking, 1000);
           <span class="moneyCounter">{{ money }}$</span>
         </v-col>
         <v-col>
-          <v-progress-linear
-            color="deep-orange"
-            height="10"
-            model-value="60"
-            striped
-          />
+          <v-progress-linear color="deep-orange" height="10" model-value="60" striped />
         </v-col>
       </v-row>
       <ClickableComputer />
@@ -83,7 +78,7 @@ setInterval(handleAutoclicking, 1000);
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
+  height: 88.5vh;
   width: 100%;
   background-color: #313338;
 }

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+
 import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '@/stores/moneyStore';
 import { useXpStore } from '@/stores/xpStore';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
 import { useSkillsStore } from '@/stores/skillsStore';
+import PcTab from "@/components/Sidebar/PcTab.vue";
+import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
+import AutoclickTab from "@/components/Sidebar/AutoclickTab.vue";
 
 const moneyStore = useMoneyStore();
 const xpStore = useXpStore();
@@ -15,10 +19,7 @@ const { money } = storeToRefs(moneyStore);
 const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
 
-import PcTab from "@/components/Sidebar/PcTab.vue";
-
-
-const currentTab = ref('autoclicker');
+const currentTab = ref<string>('autoclicker');
 
 const setCurrentTab = (value: string): void => {
   currentTab.value = value;
@@ -26,18 +27,6 @@ const setCurrentTab = (value: string): void => {
 
 const showAlert = ref(true);
 
-const buyAutoclicker = (id: number): void => {
-  const autoclicker = autoclickers.value.find((auto) => auto.id === id);
-  if (money.value >= autoclicker.price) {
-    autoclicker.currentAmount++;
-    moneyStore.removeMoney(autoclicker.price);
-  } else {
-    showAlert.value = false;
-    setTimeout(() => {
-      showAlert.value = true;
-    }, 2000);
-  }
-}
 </script>
 
 <template>
@@ -55,9 +44,9 @@ const buyAutoclicker = (id: number): void => {
         align-tabs="center"
         color="grey-darken-4"
       >
-        <v-tab :value="'autoclick'">AutoClick</v-tab>
-        <v-tab :value="'pc'">PC</v-tab>
-        <v-tab :value="'challenge'">Défi</v-tab>
+        <v-tab :value="'autoclick'">Recrutement</v-tab>
+        <v-tab :value="'pc'">Compétences</v-tab>
+        <v-tab :value="'challenge'">Défis</v-tab>
         <v-tab :value="'leaderboard'">Classement</v-tab>
       </v-tabs>
 
@@ -66,29 +55,7 @@ const buyAutoclicker = (id: number): void => {
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
-                <v-col
-                  v-for="autoClicker in autoclickers"
-                  :key="autoClicker.id"
-                  cols="12"
-                >
-                  <v-card 
-                    class="pixel-card"
-                    @click="buyAutoclicker(autoClicker.id)"
-                  >
-                    <v-row align="center">
-                      <v-col cols="4" class="image-container">
-                        <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
-                      </v-col>
-                      <v-col cols="7">
-                        <v-card-title class="pixel-title">{{ autoClicker.name }} : {{ autoClicker.price }}$</v-card-title>
-                        <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
-                      </v-col>
-                      <v-col cols="1">
-                        <span>{{ autoClicker.currentAmount }}</span>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
+                <AutoclickTab/>
               </div>
               <div v-else-if="tab === 'pc'">
                 <PcTab/>
@@ -97,7 +64,7 @@ const buyAutoclicker = (id: number): void => {
                 <p>This is the Challenge tab content.</p>
               </div>
               <div v-else-if="tab === 'leaderboard'">
-                <p>This is the Leaderboard tab content.</p>
+                <LeaderboardTab />
               </div>
             </v-row>
           </v-container>

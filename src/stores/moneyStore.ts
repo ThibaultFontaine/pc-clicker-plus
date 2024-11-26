@@ -1,19 +1,30 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { getMe, saveData } from '@/services/user'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useMoneyStore = defineStore('money', () => {
-  const money = ref<number>(0);
+  const money = ref<number>(0)
+  const memoryMoney = ref<number>(0)
 
-  //Ajouter de l'argent
+  getMe().then((user) => {
+    money.value = user?.money || 0
+    memoryMoney.value = user?.money || 0
+  })
+
   const addMoney = (amount: number) => {
-    money.value += amount;
-    console.log('money', money.value);
-  };
+    money.value += amount
+  }
 
-  //Retirer de l'argent
   const removeMoney = (amount: number) => {
-    money.value -= amount;
-  };
+    money.value -= amount
+  }
 
-  return { money, addMoney, removeMoney };
-});
+  setInterval(() => {
+    if (memoryMoney.value === money.value) return
+
+    saveData({ money: money.value })
+    memoryMoney.value = money.value
+  }, 1000 * 10)
+
+  return { money, addMoney, removeMoney }
+})
