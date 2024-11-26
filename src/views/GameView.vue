@@ -1,43 +1,33 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
-import { useMoneyStore } from '@/stores/moneyStore'
-import { useXpStore } from '@/stores/xpStore'
-import { useLevelStore } from '@/stores/levelStore'
-import { useClickStore } from '@/stores/clickStore'
-import { useAutoclickersStore } from '@/stores/autoclickersStore'
-
-import { type Autoclicker } from '@/stores/autoclickersStore'
+import { useAutoclickersStore } from '@/stores/autoclickersStore';
+import { useMoneyStore } from '@/stores/moneyStore';
 
 
 import ClickableComputer from '@/components/ClickableComputer.vue';
+import type { ComputedRef } from 'vue';
 import GameSidebar from "../components/GameSidebar.vue";
-import type { ComputedRef } from 'vue'
+import type { AutoClicker } from '@/models/autoClicker';
 
 const moneyStore = useMoneyStore()
-const xpStore = useXpStore()
-const levelStore = useLevelStore()
-const clickStore = useClickStore()
 const autoclickersStore = useAutoclickersStore()
 
 const { money } = storeToRefs(moneyStore)
-const { xp } = storeToRefs(xpStore)
-const { level } = storeToRefs(levelStore)
-const { clicks } = storeToRefs(clickStore)
 const { autoclickers } = storeToRefs(autoclickersStore)
 
 const totalAutoclickers: ComputedRef<number> = computed(() => {
   console.log(autoclickers)
   return autoclickers.value
-  .map((auto: Autoclicker) => auto.currentAmount)
+  .map((auto: AutoClicker) => auto.currentAmount)
   .reduce((acc: number, val: number) => acc + val, 0)
 });
 
 const handleAutoclicking = (): void => {
   if (totalAutoclickers.value > 0) {
     const totalMoneyPerSecond: number = Object.values(autoclickers.value)
-      .map((auto: any) => auto.currentAmount * auto.cps)
+      .map((auto: AutoClicker) => auto.currentAmount * auto.cps)
       .reduce((acc: number, val: number) => acc + val, 0)
       ;
 
