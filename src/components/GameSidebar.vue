@@ -12,6 +12,8 @@ const autoclickersStore = useAutoclickersStore();
 const { money } = storeToRefs(moneyStore);
 const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
+import PcTab from "@/components/Sidebar/PcTab.vue";
+
 
 const currentTab = ref('autoclicker');
 
@@ -57,11 +59,7 @@ const buyAutoclicker = (id: number): void => {
       </v-tabs>
 
       <v-tabs-window v-model="currentTab">
-        <v-tabs-window-item
-          v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']"
-          :key="tab"
-          :value="tab"
-        >
+        <v-tabs-window-item v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']" :key="tab" :value="tab">
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
@@ -90,7 +88,7 @@ const buyAutoclicker = (id: number): void => {
                 </v-col>
               </div>
               <div v-else-if="tab === 'pc'">
-                <p>This is the PC tab content.</p>
+                <PcTab/>
               </div>
               <div v-else-if="tab === 'challenge'">
                 <p>This is the Challenge tab content.</p>
@@ -107,7 +105,6 @@ const buyAutoclicker = (id: number): void => {
 </template>
 
 <style scoped>
-
 .sidebar {
   display: flex;
   padding-top: 2rem;
@@ -134,12 +131,15 @@ const buyAutoclicker = (id: number): void => {
 .scrollable-content {
   max-height: 80vh;
   overflow-y: auto;
-  -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
-  scrollbar-width: none;  /* Hide Scrollbar Firefox */
+  -ms-overflow-style: none;
+  /* Hide Scrollbar IE and Edge */
+  scrollbar-width: none;
+  /* Hide Scrollbar Firefox */
 }
 
 .scrollable-content::-webkit-scrollbar {
-  display: none;/* Hide Scrollbar Chrome */
+  display: none;
+  /* Hide Scrollbar Chrome */
 }
 
 .pixel-card {
