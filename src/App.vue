@@ -12,19 +12,8 @@ import PagesFooter from "@/components/PageFooter.vue";
 
 <style scoped>
 #app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-}
-
-.RouterView {
-  flex: 1; 
-}
-
-.PagesFooter {
-  height: auto;
-  flex-shrink: 0; 
+  min-width: 100%;
+  min-height: 100%;
 }
 @font-face {
   font-family: 'PixelFont';

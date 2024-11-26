@@ -75,7 +75,7 @@ setInterval(handleAutoclicking, 1000);
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
+  height: 88.5vh;
   width: 100%;
   background-color: #313338;
 }

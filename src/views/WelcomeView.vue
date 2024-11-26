@@ -20,17 +20,20 @@ const startClick = () => {
 
 <template>
   <div class="welcome-view">
-    <h1 class="title">Bienvenue sur PC-CLICKER + !</h1>
-    <p class="description">PC-CLICKER + est le jeux de l'année.<br><br>
+    
+    <v-row class="d-flex flex-column justify-center align-center">
+      <h1 class="title">Bienvenue sur PC-CLICKER + !</h1>
+      <p class="description">PC-CLICKER + est le jeux de l'année.<br><br>
       Il vous propose de monter les échellons de l'empire du dev via la frénésie de vos clicks.<br>
       Augmentez vos connaissance, montez en expérience et affrontez le reste du monde !😎<br>
       Prêt à relever le défi ?<br>
       À vos claviers, prêt... Cliquez !</p>
 
-    <v-row class="d-flex flex-column justify-center align-center">
       <v-text-field v-model="username" label="Entrez votre nom d'utilisateur" class="username-input w-50 mb-3"
         :rules="[(v: string) => !!v || 'Champ requis']" hide-details="auto" variant="underlined" clearable
-        base-color="white" color="white" />
+        base-color="white" color="white" 
+      />
+      
       <v-btn class="action-button w-50" @click="startClick" :disabled="!username">Démarrer</v-btn>
     </v-row>
   </div>
@@ -43,18 +46,18 @@ const startClick = () => {
   background-color: #313338;
   text-align: center;
   font-family: Arial, sans-serif;
-  height: 100%;
+  height: 90vh;
   width: 100%;
 }
 
 .title {
-  font-size: 3em;
+  font-size: 2.5em;
   color: white;
   padding-top: 2%;
 }
 
 .description {
-  margin: 10%;
+  padding: 5%;
   font-size: 1.5em;
   color: white;
 }
