@@ -40,6 +40,11 @@ html,body{
   font-family: 'PixelFont';
 }
 
+.levelCounter {
+  font-size: 2rem;
+  color: #ccc;
+}
+
 .moneyCounter {
   font-size: 2rem;
   color: green;

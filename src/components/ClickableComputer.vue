@@ -67,6 +67,13 @@ window.addEventListener('keydown', onHotkey);
 </script>
 
 <template>
-  <img :src="currentImage" alt="Computer" width="400" height="400" @click="manualClick()" @mousedown="onMouseDown"
-    @mouseup="onMouseUp" />
+  <img 
+    :src="currentImage" 
+    alt="Computer" 
+    width="400" 
+    height="400" 
+    @click="manualClick()" 
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp" 
+  />
 </template>
