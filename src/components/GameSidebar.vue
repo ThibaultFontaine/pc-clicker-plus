@@ -4,6 +4,22 @@ import { ref } from 'vue';
 import PcTab from "@/components/Sidebar/PcTab.vue";
 import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
 import AutoclickTab from "@/components/Sidebar/AutoclickTab.vue";
+import ChallengesList from "@/components/Sidebar/ChallengesList.vue"
+import { useMoneyStore } from "@/stores/moneyStore";
+import { useXpStore } from "@/stores/xpStore";
+import { useAutoclickersStore } from "@/stores/autoClickersStore";
+import { storeToRefs } from 'pinia'
+
+
+
+
+const moneyStore = useMoneyStore();
+const xpStore = useXpStore();
+const autoclickersStore = useAutoclickersStore();
+
+const { money } = storeToRefs(moneyStore);
+const { xp } = storeToRefs(xpStore);
+const { autoclickers } = storeToRefs(autoclickersStore);
 
 const currentTab = ref<string>('autoclicker');
 
@@ -49,7 +65,7 @@ const showAlert = () => {
                 <PcTab />
               </div>
               <div v-else-if="tab === 'challenge'">
-                <p>This is the Challenge tab content.</p>
+                <ChallengesList/>
               </div>
               <div v-else-if="tab === 'leaderboard'">
                 <LeaderboardTab />
@@ -63,6 +79,7 @@ const showAlert = () => {
 </template>
 
 <style scoped>
+@import "@/assets/styles/pixel-styles.css";
 .sidebar {
   display: flex;
   padding-top: 2rem;
@@ -94,49 +111,6 @@ const showAlert = () => {
   /* Hide Scrollbar IE and Edge */
   scrollbar-width: none;
   /* Hide Scrollbar Firefox */
-}
-
-.scrollable-content::-webkit-scrollbar {
-  display: none;
-  /* Hide Scrollbar Chrome */
-}
-
-.pixel-card {
-  background-color: #ccc;
-  border: 4px solid #000;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 4px 4px 0px #000;
-  display: flex;
-  flex-direction: row;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pixel-image {
-  width: 100%;
-  height: auto;
-  image-rendering: pixelated;
-}
-
-.pixel-title {
-  font-family: 'PixelFont', sans-serif;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.pixel-description {
-  font-family: 'PixelFont', sans-serif;
-  color: #555;
-}
-
-.pixel-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000;
 }
 
 

@@ -2,6 +2,7 @@ import { auth } from '@/firebase/config'
 import type { User } from '@/models/user'
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 
+
 const db = getFirestore()
 
 export const getMe = async (): Promise<User | null> => {

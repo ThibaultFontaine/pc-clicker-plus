@@ -1,0 +1,77 @@
+.pixel-card {
+    background-color: #ccc;
+    border: 4px solid #000;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 4px 4px 0px #000;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scrollable-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;
+    /* Hide Scrollbar Firefox */
+  }
+  
+  .scrollable-content::-webkit-scrollbar {
+    display: none;
+    /* Hide Scrollbar Chrome */
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pixel-image {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+  }
+
+  .pixel-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000;
+  }
+  
+  .pixel-title {
+    font-family: 'PixelFont', sans-serif;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .pixel-description {
+    font-family: 'PixelFont', sans-serif;
+    color: #555;
+  }
+  
+  .progress-bar {
+    margin-top: 8px;
+    width: 75%;
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    border: #000 solid 1px;
+  }
+  
+  .reward-container {
+    display: table-row;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-family: 'PixelFont', sans-serif;
+    color: #333;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  
+  .value {
+    color: #555;
+  }
+  

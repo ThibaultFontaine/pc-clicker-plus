@@ -39,6 +39,8 @@ const buyAutoClicker = (id: number) => {
             (${autoClicker.currentAmount})` : "" }}</v-card-title>
           <v-card-text class="pixel-description">{{ autoClicker.price }} $</v-card-text>
           <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
+          <v-card-text class="pixel-description">{{ autoClicker.cps }}$/sec</v-card-text>
+
         </v-col>
       </v-row>
     </v-card>
