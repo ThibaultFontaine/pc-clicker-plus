@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { autoClickers } from "@/constants/autoClickers";
+import { bonusClicks } from "@/constants/bonusClicks";
 
 const currentTab = ref('autoclicker');
 
@@ -11,14 +12,8 @@ const setCurrentTab = (value: string): void => {
 
 <template>
   <div class="sidebar">
-    <v-card
-    color="grey-darken-1"
-    >
-      <v-tabs
-        v-model="currentTab"
-        align-tabs="center"
-        color="grey-darken-4"
-      >
+    <v-card color="grey-darken-1">
+      <v-tabs v-model="currentTab" align-tabs="center" color="grey-darken-4">
         <v-tab :value="'autoclick'">AutoClick</v-tab>
         <v-tab :value="'pc'">PC</v-tab>
         <v-tab :value="'challenge'">Défi</v-tab>
@@ -26,34 +21,38 @@ const setCurrentTab = (value: string): void => {
       </v-tabs>
 
       <v-tabs-window v-model="currentTab">
-        <v-tabs-window-item
-          v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']"
-          :key="tab"
-          :value="tab"
-        >
+        <v-tabs-window-item v-for="tab in ['autoclick', 'pc', 'challenge', 'leaderboard']" :key="tab" :value="tab">
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
-                <v-col
-                  v-for="autoClicker in autoClickers"
-                  :key="autoClicker.id"
-                  cols="12"
-                >
-                <v-card class="pixel-card">
-                  <v-row align="center">
-                    <v-col cols="4" class="image-container">
-                      <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
-                    </v-col>
-                    <v-col cols="8">
-                      <v-card-title class="pixel-title">{{ autoClicker.name }}</v-card-title>
-                      <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
-                    </v-col>
-                  </v-row>
-                </v-card>
+                <v-col v-for="autoClicker in autoClickers" :key="autoClicker.id" cols="12">
+                  <v-card class="pixel-card">
+                    <v-row align="center">
+                      <v-col cols="4" class="image-container">
+                        <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
+                      </v-col>
+                      <v-col cols="8">
+                        <v-card-title class="pixel-title">{{ autoClicker.name }}</v-card-title>
+                        <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
+                      </v-col>
+                    </v-row>
+                  </v-card>
                 </v-col>
               </div>
               <div v-else-if="tab === 'pc'">
-                <p>This is the PC tab content.</p>
+                <v-col v-for="bonusClick in bonusClicks" :key="bonusClick.id" cols="12">
+                  <v-card class="pixel-card">
+                    <v-row align="center">
+                      <v-col cols="4" class="image-container">
+                        <img :src="bonusClick.image" alt="BonusClick Image" class="pixel-image">
+                      </v-col>
+                      <v-col cols="8">
+                        <v-card-title>{{ bonusClick.name }}</v-card-title>
+                        <v-card-text>{{ bonusClick.description }}</v-card-text>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-col>
               </div>
               <div v-else-if="tab === 'challenge'">
                 <p>This is the Challenge tab content.</p>
@@ -70,7 +69,6 @@ const setCurrentTab = (value: string): void => {
 </template>
 
 <style scoped>
-
 .sidebar {
   display: flex;
   padding-top: 2rem;
@@ -97,12 +95,15 @@ const setCurrentTab = (value: string): void => {
 .scrollable-content {
   max-height: 80vh;
   overflow-y: auto;
-  -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
-  scrollbar-width: none;  /* Hide Scrollbar Firefox */
+  -ms-overflow-style: none;
+  /* Hide Scrollbar IE and Edge */
+  scrollbar-width: none;
+  /* Hide Scrollbar Firefox */
 }
 
 .scrollable-content::-webkit-scrollbar {
-  display: none;/* Hide Scrollbar Chrome */
+  display: none;
+  /* Hide Scrollbar Chrome */
 }
 
 .pixel-card {
