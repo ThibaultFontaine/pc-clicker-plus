@@ -30,7 +30,6 @@ const showAlert = () => {
     alert.value = true;
   }, 2000);
 }
-
 </script>
 
 <template>
