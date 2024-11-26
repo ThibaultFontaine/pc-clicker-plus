@@ -69,4 +69,8 @@ const buyAutoClicker = (id: number) => {
   height: auto;
   image-rendering: pixelated;
 }
+
+img {
+  pointer-events: none;
+}
 </style>

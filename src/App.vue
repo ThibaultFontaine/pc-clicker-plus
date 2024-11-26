@@ -21,4 +21,14 @@ import PagesFooter from "@/components/PageFooter.vue";
   font-weight: normal;
   font-style: normal;
 }
+* {
+  user-select: none; /* Désactive la sélection */
+  -webkit-user-select: none; /* Pour les navigateurs WebKit */
+  -moz-user-select: none; /* Pour les navigateurs Mozilla */
+  -ms-user-select: none; /* Pour Internet Explorer */
+}
+
+img {
+  pointer-events: none;
+}
 </style>

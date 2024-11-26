@@ -70,4 +70,8 @@ const buySkill = (id: number): void => {
   height: auto;
   image-rendering: pixelated;
 }
+
+img {
+  pointer-events: none;
+}
 </style>
