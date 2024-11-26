@@ -1,14 +1,13 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useXpStore = defineStore('xp', () => {
-  const xp = ref<number>(0);
+  const xp = ref<number>(0)
 
   //Ajouter de l'xp
   const addXp = (amount: number) => {
-    xp.value += amount;
-    console.log('xp', xp.value);
-  };
+    xp.value += amount
+  }
 
-  return { xp, addXp };
-});
+  return { xp, addXp }
+})

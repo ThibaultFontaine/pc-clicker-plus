@@ -41,11 +41,7 @@ const handleAutoclicking = (): void => {
       .reduce((acc: number, val: number) => acc + val, 0)
       ;
 
-    console.log(totalMoneyPerSecond);
-
     moneyStore.addMoney(totalMoneyPerSecond);
-
-    console.log(money.value);
   }
 
 }

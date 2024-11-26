@@ -1,7 +1,12 @@
-export interface AutoClicker {
-  id: number
+export type AutoClicker = AutoClickerDb & {
   name: string
   price: number
-  cps: number
   description: string
+  image: string
+}
+
+export type AutoClickerDb = {
+  id: number
+  cps: number
+  currentAmount: number
 }

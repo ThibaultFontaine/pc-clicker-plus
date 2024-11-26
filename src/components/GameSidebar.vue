@@ -1,31 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { storeToRefs } from 'pinia';
-import { useMoneyStore } from '@/stores/moneyStore';
-import { useXpStore } from '@/stores/xpStore';
-import { useAutoclickersStore } from '@/stores/autoclickersStore';
-import { useSkillsStore } from '@/stores/skillsStore';
 import PcTab from "@/components/Sidebar/PcTab.vue";
 import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
 import AutoclickTab from "@/components/Sidebar/AutoclickTab.vue";
 
-const moneyStore = useMoneyStore();
-const xpStore = useXpStore();
-const autoclickersStore = useAutoclickersStore();
-const skillsStore = useSkillsStore();
-
-const { money } = storeToRefs(moneyStore);
-const { xp } = storeToRefs(xpStore);
-const { autoclickers } = storeToRefs(autoclickersStore);
-
 const currentTab = ref<string>('autoclicker');
 
-const setCurrentTab = (value: string): void => {
-  currentTab.value = value;
+const alert = ref(true);
+const showAlert = () => {
+  alert.value = false;
+  setTimeout(() => {
+    alert.value = true;
+  }, 2000);
 }
-
-const showAlert = ref(true);
 
 </script>
 
@@ -35,7 +23,7 @@ const showAlert = ref(true);
       color="grey-darken-1"
     >
       <v-alert
-        :hidden="showAlert"
+        :hidden="alert"
         color="error"
         text="Tu es trop pauvre ! Reviens après avoir plus clické !"
       />
@@ -55,10 +43,10 @@ const showAlert = ref(true);
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
-                <AutoclickTab/>
+                <AutoclickTab :sendError="showAlert"  />
               </div>
               <div v-else-if="tab === 'pc'">
-                <PcTab/>
+                <PcTab />
               </div>
               <div v-else-if="tab === 'challenge'">
                 <p>This is the Challenge tab content.</p>
@@ -83,7 +71,8 @@ const showAlert = ref(true);
   align-items: center;
   height: 100vh;
   width: 90%;
-  overflow-y: auto
+  overflow-y: auto;
+  user-select: none;
 }
 
 .topBar {

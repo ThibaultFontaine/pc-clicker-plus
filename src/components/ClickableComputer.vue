@@ -19,8 +19,6 @@ const levelStore = useLevelStore()
 const clickStore = useClickStore()
 const skillsStore = useSkillsStore()
 
-const { money } = storeToRefs(moneyStore)
-const { xp } = storeToRefs(xpStore)
 const { level } = storeToRefs(levelStore)
 const { skills } = storeToRefs(skillsStore)
 
@@ -39,12 +37,12 @@ const manualClick = () => {
   addMoney(level.value * acquiredSkills.value[acquiredSkills.value.length - 1].multiplier)
   addXp(level.value)
   addClick()
-  
+
   if (!sound.paused) {
     sound.pause();
     sound.currentTime = 0;
   }
-  
+
   sound.play().catch((error) => {
     console.error('Erreur lors de la lecture du son :', error);
   });
@@ -59,16 +57,16 @@ const onMouseDown = () => {
 const onMouseUp = () => {
   currentImage.value = defaultImage;
 };
+
+const onHotkey = (event: KeyboardEvent) => {
+  const keys = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m", "w", "x", "c", "v", "b", "n"];
+  if (keys.includes(event.key)) manualClick();
+};
+
+window.addEventListener('keydown', onHotkey);
 </script>
 
 <template>
-<img 
-  :src="currentImage"
-  alt="Computer" 
-  width="400" 
-  height="400" 
-  @click="manualClick()" 
-  @mousedown="onMouseDown"
-  @mouseup="onMouseUp"
-/>
+  <img :src="currentImage" alt="Computer" width="400" height="400" @click="manualClick()" @mousedown="onMouseDown"
+    @mouseup="onMouseUp" />
 </template>
