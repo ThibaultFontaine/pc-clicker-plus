@@ -4,14 +4,17 @@ import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '@/stores/moneyStore';
 import { useXpStore } from '@/stores/xpStore';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
+import { useSkillsStore } from '@/stores/skillsStore';
 
 const moneyStore = useMoneyStore();
 const xpStore = useXpStore();
 const autoclickersStore = useAutoclickersStore();
+const skillsStore = useSkillsStore();
 
 const { money } = storeToRefs(moneyStore);
 const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
+
 import PcTab from "@/components/Sidebar/PcTab.vue";
 
 

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMoneyStore } from '@/stores/moneyStore'
 import { useXpStore } from '@/stores/xpStore'
 import { useLevelStore } from '@/stores/levelStore'
 import { useClickStore } from '@/stores/clickStore'
+import { useSkillsStore } from '@/stores/skillsStore'
 
 import defaultImage from '@/assets/computer.png';
 import pressedImage from '@/assets/pressed_computer.png';
@@ -16,17 +17,26 @@ const moneyStore = useMoneyStore()
 const xpStore = useXpStore()
 const levelStore = useLevelStore()
 const clickStore = useClickStore()
+const skillsStore = useSkillsStore()
 
 const { money } = storeToRefs(moneyStore)
 const { xp } = storeToRefs(xpStore)
 const { level } = storeToRefs(levelStore)
+const { skills } = storeToRefs(skillsStore)
 
 const { addMoney } = moneyStore
 const { addXp } = xpStore
 const { addClick } = clickStore
 
+const acquiredSkills = computed(() => {
+  return skills.value.filter((skill) => skill.isAcquired);
+});
+
+console.log(acquiredSkills.value, "acquiredSkills");
+console.log(acquiredSkills.value[acquiredSkills.value.length - 1], "lastSkill");
+
 const manualClick = () => {
-  addMoney(level.value)
+  addMoney(level.value * acquiredSkills.value[acquiredSkills.value.length - 1].multiplier)
   addXp(level.value)
   addClick()
   

@@ -8,9 +8,12 @@ import { useLevelStore } from '@/stores/levelStore'
 import { useClickStore } from '@/stores/clickStore'
 import { useAutoclickersStore } from '@/stores/autoclickersStore'
 
+import { type Autoclicker } from '@/stores/autoclickersStore'
+
 
 import ClickableComputer from '@/components/ClickableComputer.vue';
 import GameSidebar from "../components/GameSidebar.vue";
+import type { ComputedRef } from 'vue'
 
 const moneyStore = useMoneyStore()
 const xpStore = useXpStore()
@@ -24,10 +27,10 @@ const { level } = storeToRefs(levelStore)
 const { clicks } = storeToRefs(clickStore)
 const { autoclickers } = storeToRefs(autoclickersStore)
 
-const totalAutoclickers: number = computed(() => {
+const totalAutoclickers: ComputedRef<number> = computed(() => {
   console.log(autoclickers)
   return autoclickers.value
-  .map((auto: any) => auto.currentAmount)
+  .map((auto: Autoclicker) => auto.currentAmount)
   .reduce((acc: number, val: number) => acc + val, 0)
 });
 

@@ -1,17 +1,63 @@
 <script setup lang="ts">
-import { bonusClicks } from "@/constants/bonusClicks";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useSkillsStore } from "@/stores/skillsStore";
+import { useMoneyStore } from "@/stores/moneyStore";
+
+const skillsStore = useSkillsStore();
+const moneyStore = useMoneyStore();
+
+const { money } = storeToRefs(moneyStore);
+const { skills } = storeToRefs(skillsStore);
+
+const { addSkill } = skillsStore;
+
+const buySkill = (id: number): void => {
+  const skill = skills.value.find((skill) => skill.id === id);
+  if (skill === undefined) {
+    return;
+  }
+
+  if (!skill.isAcquired) {
+    if (money.value >= skill.price) {
+      addSkill(skill.id);
+      moneyStore.removeMoney(skill.price);
+      console.log(`Skill ${skill.name} bought`);
+      console.log(skill)
+    }
+  }
+  /*  else {
+    showAlert.value = false;
+    setTimeout(() => {
+      showAlert.value = true;
+    }, 2000);
+  } */
+}
 </script>
 
 <template>
-<v-col v-for="bonusClick in bonusClicks" :key="bonusClick.id" cols="12">
-    <v-card class="pixel-card">
+<v-col v-for="skill in skills" :key="skill.id" cols="12">
+    <v-card 
+      class="pixel-card"
+      @click="buySkill(skill.id)"
+    >
         <v-row align="center">
             <v-col cols="4" class="image-container">
-                <img :src="bonusClick.image" alt="BonusClick" class="pixel-image">
+                <img :src="skill.image" alt="BonusClick" class="pixel-image">
             </v-col>
-            <v-col cols="8">
-                <v-card-title>{{ bonusClick.name }}</v-card-title>
-                <v-card-text>{{ bonusClick.description }}</v-card-text>
+            <v-col cols="6">
+                <v-card-title>{{ skill.name }}</v-card-title>
+                <v-card-text>{{ skill.description }}</v-card-text>
+            </v-col>
+            <v-col cols="2">
+              <span v-if="!skill.isAcquired">{{ skill.price }}</span>
+              <img
+                v-else
+                src="@/assets/acquired.png"
+                alt="Acquired"
+                width="50"
+                height="50"
+              >
             </v-col>
          </v-row>
     </v-card>
