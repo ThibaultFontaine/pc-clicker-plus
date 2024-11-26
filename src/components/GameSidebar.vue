@@ -5,6 +5,9 @@ import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '@/stores/moneyStore';
 import { useXpStore } from '@/stores/xpStore';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
+import PcTab from "@/components/Sidebar/PcTab.vue";
+import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
+import AutoclickTab from "@/components/Sidebar/AutoclickTab.vue";
 
 const moneyStore = useMoneyStore();
 const xpStore = useXpStore();
@@ -13,11 +16,6 @@ const autoclickersStore = useAutoclickersStore();
 const { money } = storeToRefs(moneyStore);
 const { xp } = storeToRefs(xpStore);
 const { autoclickers } = storeToRefs(autoclickersStore);
-import PcTab from "@/components/Sidebar/PcTab.vue";
-
-import { autoClickers } from "@/constants/autoClickers";
-import LeaderboardTab from "@/components/Sidebar/LeaderboardTab.vue";
-
 
 const currentTab = ref<string>('autoclicker');
 
@@ -67,29 +65,7 @@ const buyAutoclicker = (id: number): void => {
           <v-container fluid class="scrollable-content">
             <v-row>
               <div v-if="tab === 'autoclick'">
-                <v-col
-                  v-for="autoClicker in autoclickers"
-                  :key="autoClicker.id"
-                  cols="12"
-                >
-                  <v-card
-                    class="pixel-card"
-                    @click="buyAutoclicker(autoClicker.id)"
-                  >
-                    <v-row align="center">
-                      <v-col cols="4" class="image-container">
-                        <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
-                      </v-col>
-                      <v-col cols="7">
-                        <v-card-title class="pixel-title">{{ autoClicker.name }} : {{ autoClicker.price }}$</v-card-title>
-                        <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
-                      </v-col>
-                      <v-col cols="1">
-                        <span>{{ autoClicker.currentAmount }}</span>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
+                <AutoclickTab/>
               </div>
               <div v-else-if="tab === 'pc'">
                 <PcTab/>
