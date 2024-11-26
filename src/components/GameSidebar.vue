@@ -25,18 +25,6 @@ const setCurrentTab = (value: string): void => {
 
 const showAlert = ref(true);
 
-const buyAutoclicker = (id: number): void => {
-  const autoclicker = autoclickers.value.find((auto) => auto.id === id);
-  if (money.value >= autoclicker.price) {
-    autoclicker.currentAmount++;
-    moneyStore.removeMoney(autoclicker.price);
-  } else {
-    showAlert.value = false;
-    setTimeout(() => {
-      showAlert.value = true;
-    }, 2000);
-  }
-}
 </script>
 
 <template>

@@ -10,6 +10,8 @@
 .v-footer {
     padding: 15px;
     background-color: #282c34;
+    width: 100%;
+    height: 10%;
 }
 
 .txt-footer {

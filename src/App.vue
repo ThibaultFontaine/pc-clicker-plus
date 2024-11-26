@@ -1,19 +1,30 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Footer from "@/components/Footer.vue";
+import PagesFooter from "@/components/PageFooter.vue";
 </script>
 
 <template>
   <div id="app">
     <RouterView />
-    <Footer />
+    <PagesFooter/>    
   </div>
 </template>
 
 <style scoped>
 #app {
-  min-width: 100%;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.RouterView {
+  flex: 1; 
+}
+
+.PagesFooter {
+  height: auto;
+  flex-shrink: 0; 
 }
 @font-face {
   font-family: 'PixelFont';

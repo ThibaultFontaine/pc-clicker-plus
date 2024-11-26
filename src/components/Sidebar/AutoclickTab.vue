@@ -24,7 +24,7 @@ const showAlert = ref(true);
 
 const buyAutoclicker = (id: number): void => {
   const autoclicker = autoclickers.value.find((auto) => auto.id === id);
-  if (money.value >= autoclicker.price) {
+  if (  autoclicker != undefined && money.value >= autoclicker.price ) {
     autoclicker.currentAmount++;
     moneyStore.removeMoney(autoclicker.price);
   } else {
@@ -41,7 +41,7 @@ const buyAutoclicker = (id: number): void => {
     <v-card class="pixel-card" @click="buyAutoclicker(autoClicker.id)">
       <v-row align="center">
         <v-col cols="4" class="image-container">
-          <img :src="autoClicker.image" alt="AutoClicker Image" class="pixel-image">
+          <img :src="autoClicker.image" alt="AutoClicker" class="pixel-image">
         </v-col>
         <v-col cols="7">
           <v-card-title class="pixel-title">{{ autoClicker.name }} : {{ autoClicker.price }}$</v-card-title>
@@ -54,3 +54,27 @@ const buyAutoclicker = (id: number): void => {
     </v-card>
   </v-col>
 </template>
+
+<style scoped>
+.pixel-card {
+  background-color: #ccc;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 4px 4px 0px #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel-image {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+</style>
