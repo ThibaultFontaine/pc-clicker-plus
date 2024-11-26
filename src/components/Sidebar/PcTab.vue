@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatNumber } from "@/services/string";
 import { useMoneyStore } from "@/stores/moneyStore";
 import { useSkillsStore } from "@/stores/skillsStore";
 import { storeToRefs } from "pinia";
@@ -36,11 +37,11 @@ const buySkill = (id: number): void => {
         <v-col cols="6">
           <v-card-title>{{ skill.name }}</v-card-title>
           <v-card-text>{{ skill.description }}</v-card-text>
-          <v-card-text>clic manuel x{{ skill.multiplier }}</v-card-text>
+          <v-card-text>clic manuel x{{ formatNumber(skill.multiplier) }}</v-card-text>
 
         </v-col>
         <v-col cols="2">
-          <span v-if="!skill.isAcquired">{{ skill.price }} $</span>
+          <span v-if="!skill.isAcquired">{{ formatNumber(skill.price) }} $</span>
           <img v-else src="@/assets/acquired.png" alt="Acquired" width="50" height="50">
         </v-col>
       </v-row>

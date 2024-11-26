@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLeaderboard } from '@/services/leaderboard';
+import { formatNumber } from '@/services/string';
 import { onUnmounted } from 'vue';
 
 const { users, subscribe } = useLeaderboard();
@@ -20,7 +21,7 @@ onUnmounted(() => {
         <p class="mr-5">{{ index + 1 }}</p>
         <v-card class="d-flex flex-row align-center">
           <v-card-title>{{ user.name ? user.name : 'Anonymous' }}</v-card-title>
-          <v-card-text>{{ user.money }}$</v-card-text>
+          <v-card-text>{{ formatNumber(user.money) }}$</v-card-text>
         </v-card>
       </div>
     </div>

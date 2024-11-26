@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatNumber } from '@/services/string';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
 import { storeToRefs } from 'pinia';
 import { type PropType } from 'vue';
@@ -29,10 +30,10 @@ const buyAutoClicker = (id: number) => {
         </v-col>
         <v-col cols="7">
           <v-card-title class="pixel-title">{{ autoClicker.name }}{{ autoClicker.currentAmount ? `
-            (${autoClicker.currentAmount})` : "" }}</v-card-title>
-          <v-card-text class="pixel-description">{{ autoClicker.price }} $</v-card-text>
+            (${formatNumber(autoClicker.currentAmount)})` : "" }}</v-card-title>
+          <v-card-text class="pixel-description">{{ formatNumber(autoClicker.price) }} $</v-card-text>
           <v-card-text class="pixel-description">{{ autoClicker.description }}</v-card-text>
-          <v-card-text class="pixel-description">{{ autoClicker.cps }}$/sec</v-card-text>
+          <v-card-text class="pixel-description">{{ formatNumber(autoClicker.cps) }}$/sec</v-card-text>
 
         </v-col>
       </v-row>
