@@ -4,6 +4,11 @@ import { storeToRefs } from 'pinia'
 import { useMoneyStore } from '@/stores/moneyStore'
 import { useXpStore } from '@/stores/xpStore'
 import { useLevelStore } from '@/stores/progressionStore'
+import defaultImage from '@/assets/computer.png';
+import pressedImage from '@/assets/pressed_computer.png';
+import audioFile from '@/assets/keypress5.mp3';
+
+const sound = new Audio(audioFile);
 
 const moneyStore = useMoneyStore()
 const xpStore = useXpStore()
@@ -19,10 +24,16 @@ const { addXp } = xpStore
 const manualClick = () => {
   addMoney(level.value)
   addXp(level.value)
+  
+  if (!sound.paused) {
+    sound.pause();
+    sound.currentTime = 0;
+  }
+  
+  sound.play().catch((error) => {
+    console.error('Erreur lors de la lecture du son :', error);
+  });
 }
-
-import defaultImage from '@/assets/computer.png';
-import pressedImage from '@/assets/pressed_computer.png';
 
 const currentImage = ref(defaultImage);
 
@@ -41,7 +52,7 @@ const onMouseUp = () => {
   alt="Computer" 
   width="400" 
   height="400" 
-  @click="manualClick(1, 1)" 
+  @click="manualClick()" 
   @mousedown="onMouseDown"
   @mouseup="onMouseUp"
 />
