@@ -3,6 +3,11 @@ import { formatNumber } from '@/services/string';
 import { useAutoclickersStore } from '@/stores/autoclickersStore';
 import { storeToRefs } from 'pinia';
 import { type PropType } from 'vue';
+import { useMoneyStore } from '@/stores/moneyStore'
+
+
+const moneyStore = useMoneyStore()
+const { money } = storeToRefs(moneyStore)
 
 const props = defineProps({
   sendError: {
@@ -23,7 +28,7 @@ const buyAutoClicker = (id: number) => {
 
 <template>
   <v-col v-for="autoClicker in autoclickers" :key="autoClicker.id" cols="12">
-    <v-card class="pixel-card" @click="buyAutoClicker(autoClicker.id)">
+    <v-card :class="autoClicker.price < money ? 'pixel-card' : 'card'" @click="buyAutoClicker(autoClicker.id)">
       <v-row align="center">
         <v-col cols="4" class="image-container">
           <img :src="autoClicker.image" alt="AutoClicker" class="pixel-image">
@@ -44,6 +49,16 @@ const buyAutoClicker = (id: number) => {
 <style scoped>
 .pixel-card {
   background-color: #ccc;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 4px 4px 0px #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.card{
+  background-color: #333333;
   border: 4px solid #000;
   border-radius: 8px;
   padding: 10px;

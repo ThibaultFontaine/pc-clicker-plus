@@ -113,12 +113,12 @@ export const SKILLS: Skill[] = [
   },
   {
     id: 12,
-    name: 'Rust',
-    price: 2000000,
+    name: 'Perl',
+    price: 25000000,
     multiplier: 10000000,
     description:
-      "Rust : sécurisé par conception, mais avec une courbe d'apprentissage qui ressemble à un roller coaster.",
-    image: new URL('../assets/bonusClickImages/Rust.png', import.meta.url).href,
+      "Perl : puissant pour le texte, mais parfois aussi obscur qu'un poème surréaliste.",
+    image: new URL('../assets/bonusClickImages/Perl.png', import.meta.url).href,
     isAcquired: false,
   },
   {
@@ -142,7 +142,7 @@ export const SKILLS: Skill[] = [
   {
     id: 15,
     name: 'Scala',
-    price: 25000000,
+    price: 50000000,
     multiplier: 100000000,
     description:
       "Scala : combine la programmation fonctionnelle et orientée objet... c'est comme avoir le meilleur des deux mondes sans le désordre.",
@@ -151,19 +151,19 @@ export const SKILLS: Skill[] = [
   },
   {
     id: 16,
-    name: 'Perl',
-    price: 50000000,
-    multiplier: 10000000,
+    name: 'Rust',
+    price: 2000000,
+    multiplier: 1000000000,
     description:
-      "Perl : puissant pour le texte, mais parfois aussi obscur qu'un poème surréaliste.",
-    image: new URL('../assets/bonusClickImages/Perl.png', import.meta.url).href,
+      "Rust : sécurisé par conception, mais avec une courbe d'apprentissage qui ressemble à un roller coaster.",
+    image: new URL('../assets/bonusClickImages/Rust.png', import.meta.url).href,
     isAcquired: false,
   },
   {
     id: 17,
     name: 'Haskell',
     price: 100000000,
-    multiplier: 10000000,
+    multiplier: 1000000000,
     description:
       'Haskell : purement fonctionnel et académique, parfait pour impressionner vos amis en soirée.',
     image: new URL('../assets/bonusClickImages/Haskell.png', import.meta.url).href,
@@ -173,7 +173,7 @@ export const SKILLS: Skill[] = [
     id: 18,
     name: 'Assembly',
     price: 500000000,
-    multiplier: 10000000,
+    multiplier: 10000000000,
     description:
       "Assembly : bas niveau et performant, Réservez à ceux qui n'ont pas froid aux yeux !",
     image: new URL('../assets/bonusClickImages/Assembly.png', import.meta.url).href,
