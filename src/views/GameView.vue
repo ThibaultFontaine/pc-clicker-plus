@@ -15,12 +15,16 @@ import GameSidebar from '@/components/GameSidebar.vue';
 </template>
 
 <style>
+html,body{
+  width: 100%;
+}
+
 .gameView {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  height: 88.5vh;
+  height: 100%;
   width: 100%;
   background-color: #313338;
 }
@@ -31,7 +35,7 @@ import GameSidebar from '@/components/GameSidebar.vue';
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
+  height: 45%;
   width: 100%;
   font-family: 'PixelFont';
 }

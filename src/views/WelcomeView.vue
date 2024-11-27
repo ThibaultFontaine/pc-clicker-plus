@@ -21,7 +21,7 @@ const startClick = () => {
 <template>
   <div class="welcome-view">
     
-    <v-row class="d-flex flex-column justify-center align-center">
+    <v-row class="vrow">
       <h1 class="title">Bienvenue sur PC-CLICKER + !</h1>
       <p class="description">PC-CLICKER + est le jeux de l'année.<br><br>
       Il vous propose de monter les échellons de l'empire du dev via la frénésie de vos clicks.<br>
@@ -43,11 +43,18 @@ const startClick = () => {
 
 <style scoped>
 .welcome-view {
-  background-color: #313338;
   text-align: center;
   font-family: Arial, sans-serif;
-  height: 90vh;
+  height: 100%;
   width: 100%;
+}
+
+.vrow{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .title {
