@@ -3,7 +3,7 @@ import type { AutoClicker, AutoClickerDb } from '@/models/autoClicker'
 import { getMe, saveData } from '@/services/user'
 import { useMoneyStore } from '@/stores/moneyStore'
 import { defineStore, storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const moneyStore = useMoneyStore()
 const { money } = storeToRefs(moneyStore)
@@ -19,6 +19,10 @@ export const useAutoclickersStore = defineStore('autoclickers', () => {
       ac.currentAmount = autoClicker?.currentAmount || 0
     })
   })
+
+  const totalAutoClickers = computed(() =>
+    autoclickers.value.reduce((sum, ac) => sum + ac.currentAmount, 0)
+  );
 
   const addAutoClicker = (id: number): boolean => {
     const autoclicker = autoclickers.value.find((auto) => auto.id === id)
@@ -48,5 +52,5 @@ export const useAutoclickersStore = defineStore('autoclickers', () => {
     return true
   }
 
-  return { autoclickers, addAutoClicker }
+  return { autoclickers, addAutoClicker, totalAutoClickers }
 })

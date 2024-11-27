@@ -2,17 +2,22 @@
 import { CHALLENGES } from "@/constants/challenges";
 import { ChallengeObjective, type Challenge } from "@/models/challenge";
 import { getMe, saveData } from "@/services/user";
+import { useAutoclickersStore } from "@/stores/autoclickersStore";
 import { useClickStore } from "@/stores/clickStore";
 import { useMoneyStore } from "@/stores/moneyStore";
 import { useXpStore } from "@/stores/xpStore";
 import { onMounted, ref, watch } from "vue";
+import { reactive } from 'vue';
 
 const moneyStore = useMoneyStore();
 const xpStore = useXpStore();
 const clickStore = useClickStore();
+const autoclickersStore = useAutoclickersStore();
 
 const isLoading = ref(true);
 const claimedRewards = ref<number[]>([]);
+
+const myChallenges = reactive(CHALLENGES);
 
 const calculateProgress = (challenge: Challenge) => {
   let progress = 0;
@@ -21,8 +26,7 @@ const calculateProgress = (challenge: Challenge) => {
   } else if (challenge.objective.type === ChallengeObjective.Money) {
     progress = moneyStore.money || 0;
   } else if (challenge.objective.type === ChallengeObjective.AutoClickers) {
-    // TODO : Implement autoClickers in the store
-    // progress = moneyStore.autoClickers || 0;
+    progress = autoclickersStore.totalAutoClickers || 0;
   }
   return progress;
 };
@@ -38,6 +42,7 @@ const getChallengeClass = (challenge: Challenge) => {
 };
 
 const claimReward = async (challenge: Challenge) => {
+  console.log(challenge.progress)
   if (challenge.progress >= challenge.objective.goal && !challenge.rewardClaimed) {
     moneyStore.addMoney(challenge.reward.money);
     xpStore.addXp(challenge.reward.xp);
@@ -57,7 +62,7 @@ onMounted(async () => {
 
   claimedRewards.value = currentUser?.completedChallenges || [];
 
-  CHALLENGES.forEach((challenge: Challenge) => {
+  myChallenges.forEach((challenge: Challenge) => {
     challenge.progress = calculateProgress(challenge);
 
     if (claimedRewards.value.includes(challenge.id)) {
@@ -69,9 +74,11 @@ onMounted(async () => {
 });
 
 watch(
-  () => moneyStore.money,
-  () => {
-    CHALLENGES.forEach((challenge) => {
+  () => [moneyStore.money, clickStore.clicks, autoclickersStore.autoclickers],
+  ([newMoney, newClicks, newAutoclicker]) => {
+    console.log('Money:', newMoney, 'Clicks:', newClicks, 'AutoClicker:', newAutoclicker);
+
+    myChallenges.forEach((challenge) => {
       challenge.progress = calculateProgress(challenge);
     });
   },
@@ -82,7 +89,7 @@ watch(
 <template>
   <v-container fluid class="scrollable-content">
     <v-row>
-      <v-col v-for="challenge in CHALLENGES" :key="challenge.id" cols="12">
+      <v-col v-for="challenge in myChallenges" :key="challenge.id" cols="12">
         <v-card class="pixel-card" :class="getChallengeClass(challenge)" @click="claimReward(challenge)">
           <v-col>
             <v-card-title class="pixel-title">{{ challenge.name }}</v-card-title>
