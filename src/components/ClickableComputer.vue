@@ -3,7 +3,6 @@ import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMoneyStore } from '@/stores/moneyStore'
 import { useXpStore } from '@/stores/xpStore'
-import { useLevelStore } from '@/stores/levelStore'
 import { useClickStore } from '@/stores/clickStore'
 import { useSkillsStore } from '@/stores/skillsStore'
 
@@ -15,11 +14,9 @@ const sound = new Audio(audioFile);
 
 const moneyStore = useMoneyStore()
 const xpStore = useXpStore()
-const levelStore = useLevelStore()
 const clickStore = useClickStore()
 const skillsStore = useSkillsStore()
 
-const { level } = storeToRefs(levelStore)
 const { skills } = storeToRefs(skillsStore)
 
 const { addMoney } = moneyStore
@@ -34,8 +31,8 @@ console.log(acquiredSkills.value, "acquiredSkills");
 console.log(acquiredSkills.value[acquiredSkills.value.length - 1], "lastSkill");
 
 const manualClick = () => {
-  addMoney(level.value * acquiredSkills.value[acquiredSkills.value.length - 1].multiplier)
-  addXp(level.value)
+  addMoney(1 * acquiredSkills.value[acquiredSkills.value.length - 1].multiplier)
+  addXp(1)
   addClick()
 
   if (!sound.paused) {
@@ -67,13 +64,6 @@ window.addEventListener('keydown', onHotkey);
 </script>
 
 <template>
-  <img 
-    :src="currentImage" 
-    alt="Computer" 
-    width="400" 
-    height="400" 
-    @click="manualClick()" 
-    @mousedown="onMouseDown"
-    @mouseup="onMouseUp" 
-  />
+  <img :src="currentImage" alt="Computer" width="400" height="400" @click="manualClick()" @mousedown="onMouseDown"
+    @mouseup="onMouseUp" />
 </template>
