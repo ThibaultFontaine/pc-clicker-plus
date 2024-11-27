@@ -29,7 +29,7 @@ const buySkill = (id: number): void => {
 
 <template>
   <v-col v-for="skill in skills" :key="skill.id" cols="12">
-    <v-card class="pixel-card" @click="buySkill(skill.id)">
+    <v-card :class="skill.price < money ? 'pixel-card' : 'card'" @click="buySkill(skill.id)">
       <v-row align="center">
         <v-col cols="4" class="image-container">
           <img :src="skill.image" alt="BonusClick" class="pixel-image">
@@ -52,6 +52,16 @@ const buySkill = (id: number): void => {
 <style scoped>
 .pixel-card {
   background-color: #ccc;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 4px 4px 0px #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.card{
+  background-color: #333333;
   border: 4px solid #000;
   border-radius: 8px;
   padding: 10px;
