@@ -34,6 +34,7 @@ export const useAutoclickersStore = defineStore('autoclickers', () => {
         return {
           ...ac,
           currentAmount: ac.currentAmount + 1,
+          price : Math.ceil(ac.price + (10*ac.price/100)),
         }
       }
 
